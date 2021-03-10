@@ -4,10 +4,17 @@ import { Routes, RouterModule } from '@angular/router';
 import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
+  {path: '', 
+  children: [  {
+    path: 'feed',
+    loadChildren: '../feed/feed.module#FeedPageModule'},
   {
-    path: '',
-    component: TabsPage
-  }
+    path: 'uploader',
+    loadChildren: () => import('../uploader/uploader.module').then( m => m.UploaderPageModule)},
+  {
+    path: 'profile',
+    loadChildren: () => import('../profile/profile.module').then( m => m.ProfilePageModule)}],
+  component: TabsPage},
 ];
 
 @NgModule({
