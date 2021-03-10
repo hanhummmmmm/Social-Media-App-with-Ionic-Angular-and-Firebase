@@ -7,7 +7,7 @@ const routes: Routes = [
   {path: '', 
   children: [  {
     path: 'feed',
-    loadChildren: '../feed/feed.module#FeedPageModule'},
+    loadChildren: () => import('../feed/feed.module').then( m => m.FeedPageModule)},
   {
     path: 'uploader',
     loadChildren: () => import('../uploader/uploader.module').then( m => m.UploaderPageModule)},
