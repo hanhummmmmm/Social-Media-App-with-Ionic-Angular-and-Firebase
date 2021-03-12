@@ -4,17 +4,23 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
+import { FileComponent } from '../file/file.component'
+
 import { FeedPageRoutingModule } from './feed-routing.module';
 
 import { FeedPage } from './feed.page';
+
+import { MaterialModule } from '../material-module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FeedPageRoutingModule
+    FeedPageRoutingModule,
+    MaterialModule
   ],
-  declarations: [FeedPage]
+  declarations: [FeedPage, FileComponent],
+  exports: [FileComponent]
 })
 export class FeedPageModule {}

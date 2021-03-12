@@ -1,0 +1,22 @@
+<mat-card class='file-card' *ngFor="let file of fetchedFiles">
+  <mat-card-title-group>
+    <img src='https://via.placeholder.com/50'>
+    <mat-card-title> {{file.name}} </mat-card-title>
+    <mat-card-subtitle> {{file.year}} </mat-card-subtitle>
+  </mat-card-title-group>
+  <mat-card-content>
+    Subject: {{file.subject }} <br>
+    Professor: {{ file.professor }}<br>
+    Date Posted: {{file.datePosted}} <br>
+    (...)
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary"> Learn More </button>
+  </mat-card-actions>
+</mat-card>
+
+<!-- <div *ngFor="let file of fetchedFiles">
+<h3> {{file.name}} </h3>
+<span> {{file.subject }} </span>
+<span> {{ file.professor }}</span>
+</div> -->

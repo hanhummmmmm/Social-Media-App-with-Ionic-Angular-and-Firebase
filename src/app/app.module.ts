@@ -18,6 +18,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // For Image/File Upload
 import { HttpClientModule } from "@angular/common/http";
 
+import {FeedPageModule} from './feed/feed.module'
+
 
 
 @NgModule({
@@ -30,6 +32,7 @@ import { HttpClientModule } from "@angular/common/http";
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, BrowserAnimationsModule, // imports firebase/auth, only needed for auth features
+    FeedPageModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
