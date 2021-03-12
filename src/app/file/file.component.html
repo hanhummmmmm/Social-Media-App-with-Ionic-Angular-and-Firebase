@@ -15,6 +15,17 @@
   </mat-card-actions>
 </mat-card>
 
+<mat-card *ngIf="errorName">
+  <mat-card-title>
+    {{errorName}}
+  </mat-card-title> 
+  <mat-card-content>
+    Please make sure you have connection to the internet or the server. <br>
+    <br>
+    If issue is not resolved, please contact the administrator.
+  </mat-card-content>
+</mat-card>
+
 <!-- <div *ngFor="let file of fetchedFiles">
 <h3> {{file.name}} </h3>
 <span> {{file.subject }} </span>

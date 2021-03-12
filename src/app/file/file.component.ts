@@ -27,6 +27,7 @@ interface File {
 export class FileComponent implements OnInit {
 
   fetchedFiles : File [];
+  errorName : string;
 
   apiURL = 'http://localhost:3000/files'
 
@@ -38,7 +39,7 @@ export class FileComponent implements OnInit {
     this.http.get<any>(this.apiURL).toPromise().then(data => {
       this.fetchedFiles = data.fetchedFiles;
     }).catch(error =>{
-      console.log(error);
+    this.errorName = error.name;
     });
 
     //Get id from current route
