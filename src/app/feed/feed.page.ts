@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import{ AuthGuard } from '../auth.guard'
+
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.page.html',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeedPage implements OnInit {
 
-  constructor() { }
+  constructor(public authguard: AuthGuard) { }
 
   ngOnInit() {
+    this.authguard.getCurrentUser();
   }
 
 }

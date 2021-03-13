@@ -7,6 +7,7 @@ import firebase from 'firebase/app';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
+import{ AuthGuard } from '../auth.guard'
 
 @Component({
   selector: 'app-login',
@@ -18,38 +19,14 @@ export class LoginPage implements OnInit {
   username: string = "";
   password: string = "";
 
-  constructor(public Afauth: AngularFireAuth,
+  constructor(public afAuth: AngularFireAuth,
     public router: Router,
-    public alert: AlertController) { }
+    public alert: AlertController,
+    public authguard: AuthGuard) { }
 
   ngOnInit() {
+    this.authguard.declareUserStatus();
   }
 
-  async login() {
-    const {username, password} = this;
-    try {
-      const res = await this.Afauth.signInWithEmailAndPassword(username, password);
-      console.log(res);
-      this.showAlert("Welcome back", "You are successfully signed in");
-      this.router.navigate(['/feed']);
-    } catch(err){
-      console.dir(err);
-      if (err.code == "auth/user-not-found"){
-        err.message = "No account made yet. Register first."
-        this.showAlert("Error", err.message)
-      }
-      console.error(err);
-      this.showAlert("Error", err.message)
-    }
-  }
-
-  async showAlert(header:string, message:string){
-    const alert = await this.alert.create({
-      header,
-      message,
-      buttons: ["Okay"]
-    })
-    await alert.present()
-  }
 
 }

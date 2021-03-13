@@ -45,13 +45,6 @@ export class FileComponent implements OnInit {
     //Get id from current route
     const routeParams = this.route.snapshot.paramMap;
     const fileIdFromRoute = String(routeParams.get("fileId"));
-
-    //Find file that corresponds to this ID
-    
-
-    //Using this method means that file is fetched based on whole array
-    // which means if you do implement infinite scroll you have to push
-    // and potentially refresh this method.
   }
 
 }

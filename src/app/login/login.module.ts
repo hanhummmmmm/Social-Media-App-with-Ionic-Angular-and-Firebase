@@ -9,6 +9,9 @@ import { LoginPageRoutingModule } from './login-routing.module';
 import { LoginPage } from './login.page';
 
 
+import { MaterialModule } from '../material-module';
+
+
 
 @NgModule({
   imports: [
@@ -16,6 +19,7 @@ import { LoginPage } from './login.page';
     FormsModule,
     IonicModule,
     LoginPageRoutingModule,
+    MaterialModule
   ],
   declarations: [LoginPage]
 })
