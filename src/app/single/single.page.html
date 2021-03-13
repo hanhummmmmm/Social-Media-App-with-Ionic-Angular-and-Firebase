@@ -5,5 +5,22 @@
 </ion-header>
 
 <ion-content class='ion-padding'>
+<mat-card *ngIf="file">
+  <mat-card-title-group>
+    <mat-card-title> {{ file.name}} </mat-card-title>
+    <mat-card-subtitle> {{file.year}} </mat-card-subtitle>
+  </mat-card-title-group>
+  <mat-card-content>
+    <img class="file-expanded-image" src ='https://via.placeholder.com/100x150'> <br>
+    Subject: {{file.subject }} <br>
+    Professor: {{ file.professor }}<br>
+    <span *ngIf="file.datePosted"> Date Posted: {{file.datePosted}} </span> <br>
+    <span *ngIf="file.upvotes"> Downloads: {{file.upvotes}} </span> <br> <br>
+    Description : <div class='file-description'>{{file.description}} </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary"> Download </button>
+  </mat-card-actions>
 
+</mat-card>
 </ion-content>

@@ -19,7 +19,7 @@ export class SinglePage implements OnInit {
     const routeParams = this.route.snapshot.paramMap;
     const fileIdFromRoute = routeParams.get("fileId");
     this.file = this.fetcher.getFilefromRouteId(fileIdFromRoute)
-    console.log(this.file)
+    this.file.description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dapibus augue sem, ut finibus tortor tempor blandit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et enim ut ligula maximus rutrum sed eu dolor. "
   }
 
 }
