@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ActivatedRoute } from "@angular/router";
+
 @Component({
   selector: 'app-single',
   templateUrl: './single.page.html',
@@ -7,8 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SinglePage implements OnInit {
 
-  constructor() { }
-
+  constructor(private route:ActivatedRoute) { }
   ngOnInit() {
   }
 

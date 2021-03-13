@@ -1,4 +1,4 @@
-<mat-card class='file-card' *ngFor="let file of fetchedFiles">
+<mat-card class='file-card' *ngFor="let file of fetcher.fetchedFiles">
   <mat-card-title-group>
     <img src='https://via.placeholder.com/50'>
     <mat-card-title> {{file.name}} </mat-card-title>
@@ -15,9 +15,9 @@
   </mat-card-actions>
 </mat-card>
 
-<mat-card *ngIf="errorName">
+<mat-card *ngIf="fetcher.errorName">
   <mat-card-title>
-    {{errorName}}
+    {{fetcher.errorName}}
   </mat-card-title> 
   <mat-card-content>
     Please make sure you have connection to the internet or the server. <br>
@@ -25,9 +25,3 @@
     If issue is not resolved, please contact the administrator.
   </mat-card-content>
 </mat-card>
-
-<!-- <div *ngFor="let file of fetchedFiles">
-<h3> {{file.name}} </h3>
-<span> {{file.subject }} </span>
-<span> {{ file.professor }}</span>
-</div> -->

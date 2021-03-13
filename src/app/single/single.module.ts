@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { SinglePageRoutingModule } from './single-routing.module';
 
 import { SinglePage } from './single.page';
+import { MaterialModule } from '../material-module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SinglePageRoutingModule
+    SinglePageRoutingModule,
+    MaterialModule
   ],
   declarations: [SinglePage]
 })

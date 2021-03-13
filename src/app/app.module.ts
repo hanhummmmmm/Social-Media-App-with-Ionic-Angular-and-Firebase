@@ -12,7 +12,9 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 
+//Services
 import{ AuthGuard } from './auth.guard'
+import {FetcherService} from './fetcher.service'
 
 
 
@@ -38,7 +40,7 @@ import {FeedPageModule} from './feed/feed.module'
     AngularFireAuthModule, BrowserAnimationsModule, // imports firebase/auth, only needed for auth features
     FeedPageModule
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, AuthGuard],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, AuthGuard, FetcherService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
