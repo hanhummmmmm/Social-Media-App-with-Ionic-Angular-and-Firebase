@@ -15,7 +15,7 @@ const routes: Routes = [
     path: 'profile',
     loadChildren: () => import('../profile/profile.module').then( m => m.ProfilePageModule)},
   {
-    path: 'single',
+    path: ':fileId',
     loadChildren: () => import('../single/single.module').then( m => m.SinglePageModule)
   },
   

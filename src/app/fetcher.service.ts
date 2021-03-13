@@ -25,6 +25,7 @@ interface File {
 export class FetcherService {
 
   fetchedFiles : File [];
+  file : File;
   errorName : string;
 
   apiURL = 'http://localhost:3000/files'
@@ -40,11 +41,13 @@ export class FetcherService {
     this.errorName = error.name;
     });
   }
-
-  getFilefromRouteId(){
+  
+  getFilefromRouteId(fileIdFromRoute){
     //Get id from current route
-    const routeParams = this.route.snapshot.paramMap;
-    const fileIdFromRoute = String(routeParams.get("fileId"));
+    this.fetchAllfiles();
+    this.file = this.fetchedFiles.find(file => file.id === fileIdFromRoute);
+    return this.file;
+    
   }
 
   

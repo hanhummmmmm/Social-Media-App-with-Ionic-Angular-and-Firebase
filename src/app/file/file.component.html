@@ -11,9 +11,11 @@
     (...)
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="primary"> Learn More </button>
+    <button mat-raised-button color="primary" [routerLink]="['/tabs', file.id]"> Learn More </button>
   </mat-card-actions>
 </mat-card>
+
+
 
 <mat-card *ngIf="fetcher.errorName">
   <mat-card-title>
