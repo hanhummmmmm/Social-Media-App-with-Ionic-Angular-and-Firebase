@@ -4,6 +4,34 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class='ion-padding'>
+  <mat-card class="welcome-profile-card" *ngIf="authguard.isLoggedIn()">
+    <mat-card-title>
+       Welcome Logged-in User <span *ngIf="authguard.getCurrentUser"> {{authguard.displayName}}</span>
+    </mat-card-title>
+    <mat-card-content>
+      Add some profile details below.
+    </mat-card-content>
+  </mat-card>
+
+  <div class="profile-form-container">
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Display Name</ion-label>
+      <ion-input type="text" [(ngModel)]="displayname"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Avatar URL</ion-label>
+      <ion-input type="text" [(ngModel)]="photourl"></ion-input>
+    </ion-item>
+  </ion-list>
+  <div class='button-container-center'> 
+    <button mat-raised-button color="primary" (click)="authguard.updateCurrentUser(displayname,photourl)"> Save details </button>
+  </div>
+</div>
+
+  <div class='button-container-center'>
+  <button mat-raised-button color="warn" (click)="authguard.logOut()"> Log Out </button>
+  </div>
 
 </ion-content>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import{ AuthGuard } from '../auth.guard'
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilePage implements OnInit {
 
-  constructor() { }
+  username: string = "";
+  password: string = "";
+  displayname: string = "";
+  photourl: string = "";
+
+  constructor(public authguard: AuthGuard) { }
 
   ngOnInit() {
+    this.authguard.getCurrentUser();
   }
 
 }

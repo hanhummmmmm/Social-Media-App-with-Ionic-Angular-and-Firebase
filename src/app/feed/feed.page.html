@@ -5,5 +5,15 @@
 </ion-header>
 
 <ion-content class='ion-padding'>
+  <mat-card class="logged-in-card" *ngIf="authguard.isLoggedIn()">
+     <mat-card-title>
+      Welcome Logged-in User <span *ngIf="authguard.getCurrentUser"> {{authguard.displayName}}</span>
+     </mat-card-title> 
+    <mat-card-content>
+      Check out the latest files shared by the network below!
+    </mat-card-content>
+  </mat-card>
+
   <app-file></app-file>
+
 </ion-content>

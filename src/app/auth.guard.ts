@@ -45,23 +45,30 @@ userState: any;
     return this.afAuth.authState.pipe(first()).toPromise();
  }
 
+ currentUser;
+ displayName;
  getCurrentUser(){
   const currentUser = this.afAuth.user
   currentUser.subscribe(data =>{
     console.log("Current user details logged")
     console.log(data)
+    this.displayName = data.displayName; 
   })
  }
 
  async updateCurrentUser(displayname, photourl){
+  console.log('btn clicked');
   const currentUser = await this.afAuth.currentUser
    currentUser.updateProfile({
     displayName: displayname,
     photoURL: photourl
   }).then(function() {
-    this.showAlert("Success", "Profile details are updated")
+    //this.showAlert("Success", "Profile details are updated")
+    console.log('success');
+    console.log(currentUser)
   }).catch(function(error) {
-    this.showAlert("Error", error.mesaage)
+    //this.showAlert("Error", error.mesaage)
+    console.log('error');
   });
  }
 
@@ -74,9 +81,10 @@ userState: any;
  }
 }
 
+
+// USER FUNCTIONS
   
   async login(username, password) {
-    //const {username, password} = this;
     try {
       const res = await this.afAuth.signInWithEmailAndPassword(username, password);
       console.log(res);
@@ -93,6 +101,13 @@ userState: any;
     }
   }
 
+  async logOut() {
+    return this.afAuth.signOut().then(() => {
+      this.showAlert("Success", "You are now being logged out")
+      this.router.navigate(['login']);
+    })
+  }
+  
   async showAlert(header:string, message:string){
     const alert = await this.alert.create({
       header,
