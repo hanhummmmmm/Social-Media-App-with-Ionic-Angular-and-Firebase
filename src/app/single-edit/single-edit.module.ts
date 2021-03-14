@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { SingleEditPageRoutingModule } from './single-edit-routing.module';
 
 import { SingleEditPage } from './single-edit.page';
+import { MaterialModule } from '../material-module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SingleEditPageRoutingModule
+    SingleEditPageRoutingModule,
+    MaterialModule
   ],
   declarations: [SingleEditPage]
 })

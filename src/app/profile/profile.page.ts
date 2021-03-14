@@ -22,9 +22,6 @@ export class ProfilePage implements OnInit {
     public afAuth: AuthGuard) { }
 
   ngOnInit() {
-    
-   
-
     this.fetcher.fetchAllFilesbyUser();
   }
 

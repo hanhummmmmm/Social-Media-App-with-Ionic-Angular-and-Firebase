@@ -18,6 +18,10 @@ const routes: Routes = [
     path: ':fileId',
     loadChildren: () => import('../single/single.module').then( m => m.SinglePageModule)
   },
+  {
+    path: 'edit/:fileId',
+    loadChildren: () => import('../single-edit/single-edit.module').then( m => m.SingleEditPageModule)
+  },
   
   
   ],

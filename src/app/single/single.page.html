@@ -1,13 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title> {{file.name}} </ion-title>
+    <ion-title> {{file.displayName}} </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class='ion-padding'>
 <mat-card *ngIf="file">
   <mat-card-title-group>
-    <mat-card-title> {{ file.name}} </mat-card-title>
+    <mat-card-title> {{ file.displayName}} </mat-card-title>
     <mat-card-subtitle> {{file.year}} </mat-card-subtitle>
   </mat-card-title-group>
   <mat-card-content>

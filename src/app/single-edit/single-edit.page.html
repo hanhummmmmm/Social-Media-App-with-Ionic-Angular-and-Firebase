@@ -1,9 +1,59 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>single-edit</ion-title>
+    <ion-title> {{file.displayName}} </ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content class='ion-padding'>
 
-<ion-content>
+  <mat-card class="top-card">
+    <mat-card-title>
+     Edit {{file.displayName}}
+    </mat-card-title> 
+   <mat-card-content>
+     Check out how your file looks now and make appropriate changes by filling form below.
+   </mat-card-content>
+ </mat-card>
 
+<mat-card *ngIf="file">
+  <mat-card-title-group>
+    <mat-card-title> {{ file.displayName}} </mat-card-title>
+    <mat-card-subtitle> {{file.year}} </mat-card-subtitle>
+  </mat-card-title-group>
+  <mat-card-content>
+    <img class="file-expanded-image" src ='https://via.placeholder.com/100x150'> <br>
+    Subject: {{file.subject }} <br>
+    Professor: {{ file.professor }}<br>
+    <span *ngIf="file.datePosted"> Date Posted: {{file.datePosted}} </span> <br>
+    <span *ngIf="file.upvotes"> Downloads: {{file.upvotes}} </span> <br> <br>
+    Description : <div class='file-description'>{{file.description}} </div>
+  </mat-card-content>
+</mat-card>
+
+<div class="profile-form-container">
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">File Name</ion-label>
+      <ion-input type="text" [(ngModel)]="filename"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Subject</ion-label>
+      <ion-input type="text" [(ngModel)]="subject"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Year</ion-label>
+      <ion-input type="text" [(ngModel)]="year"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Description</ion-label>
+      <ion-textarea [(ngModel)]="description"></ion-textarea>
+    </ion-item>
+  </ion-list>
+</div>
+
+
+ <button mat-raised-button (click)="uploader.onSubmitFileChange(file.id,filename, subject, year, description)"> Submit changes </button>
+
+
+<!-- Form for changing details -->
 </ion-content>
+

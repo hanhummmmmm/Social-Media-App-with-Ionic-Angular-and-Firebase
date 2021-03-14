@@ -81,6 +81,20 @@ export class UploaderService {
     })
   }
 
+  onSubmitFileChange(fileid,filename, subject, year, description){
+    this.data = {
+      'displayName': filename,
+      'subject': subject,
+      'year': year,
+      'description': description
+    }
+    this.http.put(this.apiURL + "/" + fileid, this.data).subscribe(res => {
+      console.log(res)
+      this.showAlert("Success", "Your file has been succesfully modified. Please refresh")
+    })
+  }
+
+
   async showAlert(header:string, message:string){
     const alert = await this.alert.create({
       header,

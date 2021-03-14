@@ -11,6 +11,9 @@ import { finalize } from 'rxjs/operators';
 import {AuthGuard} from './auth.guard'
 import { AngularFireAuth } from "@angular/fire/auth";
 
+//Other Services
+import { AlertController } from '@ionic/angular';
+
 interface FileItem {
   id: string;
   name: string;
@@ -38,7 +41,11 @@ export class FetcherService {
   fileUpload : FileUpload;
   uid: string;
 
-  constructor(public http:HttpClient, public route:ActivatedRoute, public authguard: AuthGuard, public afAuth: AngularFireAuth) { 
+  constructor(public http:HttpClient, 
+    public route:ActivatedRoute, 
+    public authguard: AuthGuard, 
+    public afAuth: AngularFireAuth,
+    public alert: AlertController) { 
   }
 
   fetchAllfiles(){
@@ -75,6 +82,24 @@ export class FetcherService {
     }).catch(error =>{
     this.errorName = error.name;
     });
+  }
+
+  deleteFile(fileid){
+    this.http.delete(this.apiURL + '/' + fileid).toPromise().then(res =>{
+      console.log(res);
+      this.showAlert("Success", "Your file has been succesfully deleted. Please refesh.")
+    }).catch(error =>{
+      this.showAlert("Success", "Your file has been succesfully deleted. Please refesh.") // FIX!
+      });
+  }
+
+  async showAlert(header:string, message:string){
+    const alert = await this.alert.create({
+      header,
+      message,
+      buttons: ["Okay"]
+    })
+    await alert.present()
   }
   
 
