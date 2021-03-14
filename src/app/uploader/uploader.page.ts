@@ -37,11 +37,16 @@ export class UploaderPage implements OnInit {
     this.selectedFiles = undefined;
 
     this.currentFileUpload = new FileUpload(file);
-    this.uploader.pushFileToStorage(this.currentFileUpload,this.subject, this.year).subscribe(
+    this.uploader.pushFileToStorage(this.currentFileUpload, 
+      this.filename, 
+      this.subject, 
+      this.year)
+      .subscribe(
       percentage => {
         this.percentage = Math.round(percentage);
       },
       error => {
+        this.uploader.showAlert("Error", error.message)
         console.log(error);
       }
     );

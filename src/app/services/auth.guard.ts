@@ -20,6 +20,7 @@ export interface User {
 
 export class AuthGuard {
 
+uid: string;
 userState: any;
 
   constructor(
@@ -55,13 +56,16 @@ userState: any;
     this.displayName = data.displayName; 
   })
  }
-uid:string;
- getUserId(){
+
+
+ getUserId(): string {
   const currentUser = this.afAuth.user
   currentUser.subscribe(data =>{ 
     this.uid= data.uid;
-    return this.uid;
+    console.log(this.uid)
   })
+  
+  return this.uid;
  }
 
 

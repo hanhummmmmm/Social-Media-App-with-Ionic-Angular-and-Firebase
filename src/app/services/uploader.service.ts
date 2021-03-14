@@ -4,10 +4,10 @@ import {AuthGuard} from './auth.guard'
 
 import { AlertController } from '@ionic/angular';
 
-
 // Import Database and Storage from Firebase
 import { AngularFireList } from '@angular/fire/database';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFireAuth } from "@angular/fire/auth";
 
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
@@ -23,17 +23,25 @@ export class UploaderService {
   uid;
   apiURL = 'http://localhost:3000/files'
   data;
+  timestamp;
+  datePosted: string;
+
+  
  
   
   constructor(public http: HttpClient,
     public authguard: AuthGuard,
     public alert: AlertController,
-    private db: AngularFirestore, 
-    private storage: AngularFireStorage
+    public db: AngularFirestore, 
+    private storage: AngularFireStorage,
+    public afAuth: AngularFireAuth
     ) { }
 
 
-    pushFileToStorage(fileUpload: FileUpload, subject, year): Observable<number> {
+    
+
+// add uid, date posted
+    pushFileToStorage(fileUpload: FileUpload, filename, subject, year): Observable<number> {
       const filePath = `${this.basePath}/${fileUpload.file.name}`;
       const storageRef = this.storage.ref(filePath);
       const uploadTask = this.storage.upload(filePath, fileUpload.file);
@@ -43,47 +51,30 @@ export class UploaderService {
           storageRef.getDownloadURL().subscribe(downloadURL => {
             fileUpload.url = downloadURL;
             fileUpload.name = fileUpload.file.name;
-            this.fileSubmitted(fileUpload, subject, year);
+            this.fileSubmitted(fileUpload, filename, subject, year);
           });
         })
       ).subscribe();
   
       return uploadTask.percentageChanges();
     }
-
-    private saveFileData(fileUpload: FileUpload): void {
-      console.log(fileUpload)
-    }
     
-
-    // Called when user clicks "Choose File" and saves file
-  fileSelected(event){
-    this.selectedFile = <File>event.target.files[0];
-    console.log(this.selectedFile);
-  }
-
-
-  serializeForm(formData){
-    formData.entries();
-    for (const [key, value]  of formData) {
-      this.data[key] = value;
-    }
-    return this.data;
-    }
-  
-
-  fileSubmitted(fileUpload: FileUpload, subject, year){
-    this.uid = this.authguard.getUserId(); //why is this void
-    this.data = {
-      'name': fileUpload.name,
-      'subject': subject,
-      'year': year,
-      'url': fileUpload.url,
-      'uid': this.uid
-    }
-    //convert to JSON
-    // this.data = this.serializeForm(formData)
-    // console.log(this.data)
+  async fileSubmitted(fileUpload: FileUpload, filename, subject, year){
+    await this.afAuth.currentUser.then(data => {
+      this.uid = data.uid;
+    });
+      this.timestamp = new Date();
+      this.datePosted = new Date().toLocaleString()
+      this.data = {
+        'name': fileUpload.name,
+        'displayName': filename,
+        'subject': subject,
+        'year': year,
+        'url': fileUpload.url,
+        'uid': this.uid,
+        'timestamp': -Math.abs(this.timestamp),
+        'datePosted': this.datePosted
+        }
     this.http.post(this.apiURL, this.data).subscribe(res => {
       console.log(res)
       this.showAlert("Success", "Your file has been succesfully added")

@@ -6,7 +6,20 @@
 
 <ion-content class="ion-padding">
 
- <div class="camera"></div>
+ <div class="camera">
+  <div *ngIf="currentFileUpload" class="progress mt-2">
+    <div
+      class="progress-bar progress-bar-info"
+      role="progressbar"
+      attr.aria-valuenow="{{ percentage }}"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      [ngStyle]="{ width: percentage + '%' }"
+    >
+      {{ percentage }}%
+    </div>
+  </div>
+ </div>
 
  <input type="file" (change)="selectFile($event)"/>
 
@@ -27,18 +40,7 @@
   </ion-list>
 </div>
 
-<div *ngIf="currentFileUpload" class="progress mt-2">
-  <div
-    class="progress-bar progress-bar-info"
-    role="progressbar"
-    attr.aria-valuenow="{{ percentage }}"
-    aria-valuemin="0"
-    aria-valuemax="100"
-    [ngStyle]="{ width: percentage + '%' }"
-  >
-    {{ percentage }}%
-  </div>
-</div>
+
 
 
  <button mat-raised-button (click)="onSubmit()"> Submit </button>

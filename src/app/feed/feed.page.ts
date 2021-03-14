@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from "@angular/fire/auth";
 
 import{ AuthGuard } from '../services/auth.guard'
 
@@ -8,11 +9,21 @@ import{ AuthGuard } from '../services/auth.guard'
   styleUrls: ['./feed.page.scss'],
 })
 export class FeedPage implements OnInit {
-
-  constructor(public authguard: AuthGuard) { }
+ uid: string;
+  constructor(public authguard: AuthGuard, public afAuth: AngularFireAuth
+    ) { }
 
   ngOnInit() {
-    this.authguard.getCurrentUser();
+    // await this.afAuth.currentUser.then(data => {
+    //   this.uid = data.uid;
+    //   console.log(this.uid);
+    // })
+    // console.log(this.uid);
   }
 
+  ngAfterViewInit(){
+    // console.log(this.uid);
+  }
+
+  
 }

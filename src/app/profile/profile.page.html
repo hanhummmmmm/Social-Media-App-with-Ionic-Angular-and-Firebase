@@ -10,11 +10,36 @@
        Welcome Logged-in User <span *ngIf="authguard.getCurrentUser"> {{authguard.displayName}}</span>
     </mat-card-title>
     <mat-card-content>
-      Add some profile details below.
+      Modify your latest posts below.
     </mat-card-content>
   </mat-card>
+  <h2> Edit your posts below </h2>
+  <mat-card class='file-card' *ngFor="let file of fetcher.fetchedFiles">
+    <mat-card-title-group>
+      <img src='https://via.placeholder.com/50'>
+      <mat-card-title> {{file.displayName}} </mat-card-title>
+      <mat-card-subtitle> {{file.year}} </mat-card-subtitle>
+    </mat-card-title-group>
+    <mat-card-content>
+      Subject: {{file.subject }} <br>
+      Professor: {{ file.professor }}<br>
+      Date Posted: {{file.datePosted}} <br>
+      (...)
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="accent" [routerLink]="['/tabs', file.id]"> Edit </button>
+    </mat-card-actions>
+  </mat-card>
 
-  <div class="profile-form-container">
+  <button mat-raised-button color="warn" (click)="authguard.logOut()"> Log Out </button>
+
+  
+
+
+
+
+
+  <!-- <div class="profile-form-container">
   <ion-list>
     <ion-item>
       <ion-label position="stacked">Display Name</ion-label>
@@ -28,10 +53,8 @@
   <div class='button-container-center'> 
     <button mat-raised-button color="primary" (click)="authguard.updateCurrentUser(displayname,photourl)"> Save details </button>
   </div>
-</div>
+</div> -->
 
-  <div class='button-container-center'>
-  <button mat-raised-button color="warn" (click)="authguard.logOut()"> Log Out </button>
-  </div>
+ 
 
 </ion-content>

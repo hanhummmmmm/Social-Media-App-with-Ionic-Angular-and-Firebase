@@ -7,16 +7,20 @@ import { FileUpload } from '../file.upload.model';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
-
+//For fetching of uid
+import {AuthGuard} from './auth.guard'
+import { AngularFireAuth } from "@angular/fire/auth";
 
 interface FileItem {
   id: string;
   name: string;
+  displayName: string;
   subject: string;
   professor: string;
   year: number;
   url: string;
   datePosted: string;
+  timestamp: number;
   uid: string;
   upvotes: number;
   file: File;
@@ -32,8 +36,9 @@ export class FetcherService {
   errorName : string;
   apiURL = 'http://localhost:3000/files'
   fileUpload : FileUpload;
+  uid: string;
 
-  constructor(public http:HttpClient, public route:ActivatedRoute) { 
+  constructor(public http:HttpClient, public route:ActivatedRoute, public authguard: AuthGuard, public afAuth: AngularFireAuth) { 
   }
 
   fetchAllfiles(){
@@ -57,6 +62,19 @@ export class FetcherService {
     return this.http.get(url, {
       responseType: 'blob'
     })
+  }
+
+  async fetchAllFilesbyUser(){
+    await this.afAuth.currentUser.then(data => {
+      this.uid = data.uid;
+    })
+   
+    console.log(this.apiURL + '/profile/' + this.uid);
+    this.http.get<any>(this.apiURL + '/profile/' + this.uid).toPromise().then(data => {
+      this.fetchedFiles = data.fetchedFiles;
+    }).catch(error =>{
+    this.errorName = error.name;
+    });
   }
   
 

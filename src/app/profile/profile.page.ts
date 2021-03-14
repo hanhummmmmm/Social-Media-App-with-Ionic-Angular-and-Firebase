@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
+import { AngularFireAuth } from "@angular/fire/auth";
 import{ AuthGuard } from '../services/auth.guard'
+import {FetcherService } from '../services/fetcher.service'
 
 @Component({
   selector: 'app-profile',
@@ -14,10 +15,17 @@ export class ProfilePage implements OnInit {
   displayname: string = "";
   photourl: string = "";
 
-  constructor(public authguard: AuthGuard) { }
+  uid;
+
+  constructor(public authguard: AuthGuard,
+    public fetcher: FetcherService,
+    public afAuth: AuthGuard) { }
 
   ngOnInit() {
-    this.authguard.getCurrentUser();
+    
+   
+
+    this.fetcher.fetchAllFilesbyUser();
   }
 
 }
