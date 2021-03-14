@@ -27,7 +27,11 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule),
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin }
+  },  {
+    path: 'single-edit',
+    loadChildren: () => import('./single-edit/single-edit.module').then( m => m.SingleEditPageModule)
   },
+
 
 ];
 
