@@ -7,7 +7,7 @@ import firebase from 'firebase/app';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
-import{ AuthGuard } from '../auth.guard'
+import{ AuthGuard } from '../services/auth.guard'
 
 @Component({
   selector: 'app-login',

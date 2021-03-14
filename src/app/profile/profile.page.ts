@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import{ AuthGuard } from '../auth.guard'
+import{ AuthGuard } from '../services/auth.guard'
 
 @Component({
   selector: 'app-profile',

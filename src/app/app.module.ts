@@ -13,8 +13,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 
 //Services
-import{ AuthGuard } from './auth.guard'
-import {FetcherService} from './fetcher.service'
+import{ AuthGuard } from './services/auth.guard'
+import {FetcherService} from './services/fetcher.service'
 
 
 

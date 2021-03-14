@@ -4,9 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from "@angular/router";
 
 
-
-
-interface File {
+interface FileItem {
   id: string;
   name: string;
   subject: string;
@@ -14,20 +12,19 @@ interface File {
   year: number;
   url: string;
   datePosted: string;
-  user: string;
+  uid: string;
   upvotes: number;
+  file: File;
 };
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class FetcherService {
 
-  fetchedFiles : File [];
-  file : File;
+  fetchedFiles : FileItem [];
+  file : FileItem;
   errorName : string;
-
   apiURL = 'http://localhost:3000/files'
 
   constructor(public http:HttpClient, public route:ActivatedRoute) { 
@@ -49,6 +46,8 @@ export class FetcherService {
     return this.file;
     
   }
+  
+
 
   
 }

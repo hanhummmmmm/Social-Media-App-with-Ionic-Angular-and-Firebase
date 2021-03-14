@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import {FetcherService} from '../fetcher.service'
+import {FetcherService} from '../services/fetcher.service'
 
 @Component({
   selector: 'app-file',
