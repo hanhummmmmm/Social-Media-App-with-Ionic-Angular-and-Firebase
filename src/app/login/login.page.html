@@ -4,25 +4,31 @@
   </ion-toolbar>
 </ion-header>
 
+<!-- <mat-toolbar>
+  <img class="toolbar-logo "src="https://via.placeholder.com/75">
+  <span> Login </span>
+</mat-toolbar> -->
+
 <ion-content padding>
 
+  <ion-grid fixed>
+      <ion-list>
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="text" [(ngModel)]="username"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input type="password" [(ngModel)]="password"></ion-input>
+        </ion-item>
+      </ion-list>
+        <ion-button fill="solid" color="dark" (click)="authguard.login(username,password)"> Login 
+        </ion-button>
+</ion-grid>
+
   
-  <ion-list>
-    <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="text" [(ngModel)]="username"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" [(ngModel)]="password"></ion-input>
-    </ion-item>
-
-  </ion-list>
-
-  
 
 
 
-  <ion-button fill="solid" expand="block" color="dark" (click)="authguard.login(username,password)"> Login </ion-button>
 
 </ion-content>
