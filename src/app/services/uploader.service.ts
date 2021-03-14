@@ -78,7 +78,7 @@ export class UploaderService {
       'name': fileUpload.name,
       'subject': subject,
       'year': year,
-      'file': "sfkjafjk",
+      'url': fileUpload.url,
       'uid': this.uid
     }
     //convert to JSON

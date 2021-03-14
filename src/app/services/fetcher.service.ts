@@ -3,6 +3,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from "@angular/router";
 
+import { FileUpload } from '../file.upload.model';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+
+
 
 interface FileItem {
   id: string;
@@ -26,6 +31,7 @@ export class FetcherService {
   file : FileItem;
   errorName : string;
   apiURL = 'http://localhost:3000/files'
+  fileUpload : FileUpload;
 
   constructor(public http:HttpClient, public route:ActivatedRoute) { 
   }
@@ -45,6 +51,12 @@ export class FetcherService {
     this.file = this.fetchedFiles.find(file => file.id === fileIdFromRoute);
     return this.file;
     
+  }
+
+  download(url: string): Observable<Blob> {
+    return this.http.get(url, {
+      responseType: 'blob'
+    })
   }
   
 

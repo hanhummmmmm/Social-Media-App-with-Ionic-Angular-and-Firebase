@@ -22,4 +22,17 @@ export class SinglePage implements OnInit {
     this.file.description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dapibus augue sem, ut finibus tortor tempor blandit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et enim ut ligula maximus rutrum sed eu dolor. "
   }
 
+  download(): void {
+    this.fetcher
+      .download(this.file.url)
+      .subscribe(blob => {
+        const a = document.createElement('a')
+        const objectUrl = URL.createObjectURL(blob)
+        a.href = objectUrl
+        a.download = this.file.name;
+        a.click();
+        URL.revokeObjectURL(objectUrl);
+      })
+  }
+
 }
