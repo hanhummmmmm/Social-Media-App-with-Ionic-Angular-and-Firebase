@@ -55,6 +55,16 @@ userState: any;
     this.displayName = data.displayName; 
   })
  }
+uid:string;
+ getUserId(){
+  const currentUser = this.afAuth.user
+  currentUser.subscribe(data =>{ 
+    this.uid= data.uid;
+    return this.uid;
+  })
+ }
+
+
 
  async updateCurrentUser(displayname, photourl){
   console.log('btn clicked');
@@ -64,7 +74,8 @@ userState: any;
     photoURL: photourl
   }).then(function() {
     //this.showAlert("Success", "Profile details are updated")
-    console.log('success');
+    var displayName = currentUser.displayName;
+    var photoURL = currentUser.photoURL;
     console.log(currentUser)
   }).catch(function(error) {
     //this.showAlert("Error", error.mesaage)

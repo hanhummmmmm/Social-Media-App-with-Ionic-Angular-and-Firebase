@@ -8,12 +8,17 @@ import { UploaderPageRoutingModule } from './uploader-routing.module';
 
 import { UploaderPage } from './uploader.page';
 
+import { MaterialModule } from '../material-module';
+
+// import { AngularFireStorageModule } from 'angularfire2/storage'
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    UploaderPageRoutingModule
+    UploaderPageRoutingModule,
+    MaterialModule,
   ],
   declarations: [UploaderPage]
 })

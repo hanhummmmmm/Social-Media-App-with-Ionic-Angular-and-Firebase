@@ -8,6 +8,40 @@
 
  <div class="camera"></div>
 
- <input type="file" (change)="fileChanged($event)"/>
+ <input type="file" (change)="selectFile($event)"/>
+
+ <div class="profile-form-container">
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">File Name</ion-label>
+      <ion-input type="text" [(ngModel)]="filename"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Subject</ion-label>
+      <ion-input type="text" [(ngModel)]="subject"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Year</ion-label>
+      <ion-input type="text" [(ngModel)]="year"></ion-input>
+    </ion-item>
+  </ion-list>
+</div>
+
+<div *ngIf="currentFileUpload" class="progress mt-2">
+  <div
+    class="progress-bar progress-bar-info"
+    role="progressbar"
+    attr.aria-valuenow="{{ percentage }}"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    [ngStyle]="{ width: percentage + '%' }"
+  >
+    {{ percentage }}%
+  </div>
+</div>
+
+
+ <button mat-raised-button (click)="onSubmit()"> Submit </button>
+ 
 
 </ion-content>

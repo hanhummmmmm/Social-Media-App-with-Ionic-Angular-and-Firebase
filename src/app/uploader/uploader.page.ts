@@ -2,30 +2,54 @@ import { Component, OnInit } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 
+import {UploaderService} from "../services/uploader.service"
+import {FileUpload} from "../file.upload.model"
+
 @Component({
   selector: 'app-uploader',
   templateUrl: './uploader.page.html',
   styleUrls: ['./uploader.page.scss'],
 })
 export class UploaderPage implements OnInit {
-  constructor(public http: HttpClient) { }
+
+  filename: string;
+  subject: string;
+  professor: string;
+  year: number;
+
+  selectedFiles: FileList;
+  currentFileUpload: FileUpload;
+  percentage: number;
+
+  constructor(public http: HttpClient,
+    public uploader: UploaderService,
+    ) { }
 
   ngOnInit() {
   }
 
-  fileChanged(event){
-    const files = event.target.files;
-    
-    const data = new FormData();
-    data.append('UPLOADCARE_PUB_KEY', 'e1296bd738303f9bcc7e');
-    data.append('UPLOADCARE_STORE', '1')
-    data.append('file', files[0])
-
-
-    this.http.post('https://upload.uploadcare.com/base/', data)
-    .subscribe(event => {
-      console.log(event);
-    });
+  selectFile(event): void {
+    this.selectedFiles = event.target.files;
   }
 
-}
+  onSubmit() {
+    const file = this.selectedFiles.item(0);
+    this.selectedFiles = undefined;
+
+    this.currentFileUpload = new FileUpload(file);
+    this.uploader.pushFileToStorage(this.currentFileUpload,this.subject, this.year).subscribe(
+      percentage => {
+        this.percentage = Math.round(percentage);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+
+  }
+
+ 
+
+
